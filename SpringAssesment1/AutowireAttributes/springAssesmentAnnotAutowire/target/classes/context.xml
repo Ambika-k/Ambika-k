@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="emp1" class="com.zensar.beans.Employee" autowire="byName">
+		<property name="empId" >
+			<value type="int">101</value>
+		</property>
+		<property name="empName">
+			<value>"Ambika"</value>
+		</property>
+		<property name="empSalary">
+			<value type="int">20000</value>
+		</property>
+	</bean>
+	<bean id="emp2" class="com.zensar.beans.Employee" autowire="byType">
+		<property name="empId">
+			<value type="int">102</value>
+		</property>
+		<property name="empName">
+			<value>"Ankitha"</value>
+		</property>
+		<property name="empSalary">
+			<value type="int">20000</value>
+		</property>
+	</bean>
+	<bean id="emp3" class="com.zensar.beans.Employee" autowire="constructor">
+		<property name="empId">
+			<value type="int">103</value>
+		</property>
+		<property name="empName">
+			<value>"Ananya"</value>
+		</property>
+		<property name="empSalary">
+			<value type="int">20000</value>
+		</property>
+	</bean>
+	<bean id="department" class="com.zensar.beans.Departemnt" autowire-candidate="false" >
+	<property name="deptId" value="201"></property>
+	<property name="deptName" value="IT"></property>
+	</bean>
+	<bean id="department1" class="com.zensar.beans.Departemnt">
+	<property name="deptId" value="202"></property>
+	<property name="deptName" value="IT"></property>
+	</bean>
+
+</beans>
