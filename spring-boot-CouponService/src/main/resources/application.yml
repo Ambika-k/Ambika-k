@@ -1,0 +1,10 @@
+server:
+  port: 1111
+spring:
+  datasource:
+    password: Ambika@91
+    url: jdbc:mysql://localhost:3306/javabatch
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
