@@ -24,7 +24,7 @@ public class CouponController {
 
 	@GetMapping(value = "/coupon/{couponId}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public Coupon getCoupon(@PathVariable("coupon") int CouponId) {
+	public Coupon getCoupon(@PathVariable("couponId") int CouponId) {
 		return couponService.getCoupon(CouponId);
 	}
 
