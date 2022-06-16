@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.ide.Service.CouponService;
@@ -38,11 +39,12 @@ public class CouponController {
 
 //	@GetMapping(value = "/coupons",produces = { MediaType.APPLICATION_JSON_VALUE,
 //			MediaType.APPLICATION_XML_VALUE })
-	@GetMapping(value = "/coupons")
+	@GetMapping(value = "/coupons/")
 	// public List<CouponDto> getCoupons() {
-	public ResponseEntity<List<CouponDto>> getCoupons() {
+	//public ResponseEntity<List<CouponDto>> getCoupons() {
+	public ResponseEntity<List<CouponDto>> getCoupons(@RequestParam(value="pageNumber",required=false,defaultValue="0")int pageNumber,@RequestParam(value="pageSize",required = false,defaultValue = "3")int pageSize) {
 		// return couponService.getCoupons();
-		return new ResponseEntity<List<CouponDto>>(couponService.getCoupons(), HttpStatus.OK);
+		return new ResponseEntity<List<CouponDto>>(couponService.getCoupons(pageNumber,pageSize), HttpStatus.OK);
 	}
 
 //	@PostMapping(value = "/coupons",consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
@@ -70,5 +72,31 @@ public class CouponController {
 	public ResponseEntity<String> deleteCoupon(@PathVariable("couponId") int CouponId) {
 		couponService.deleteCoupon(CouponId);
 		return new ResponseEntity<String>("Coupon deleted Succesfully", HttpStatus.OK);
+	}
+
+	@GetMapping("coupons/code/{couponCode}")
+	public ResponseEntity<List<CouponDto>> getByCouponCode(@PathVariable("couponCode") String couponCode) {
+		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCode(couponCode), HttpStatus.OK);
+	}
+
+	@GetMapping("coupons/{couponCode}/{couponPrice}")
+	public ResponseEntity<List<CouponDto>> getByCouponCodeOrCouponPrice(@PathVariable("couponCode") String couponCode,
+			@PathVariable("couponPrice") int couponPrice) {
+		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCodeOrCouponPrice(couponCode, couponPrice),
+				HttpStatus.OK);
+	}
+
+	@GetMapping("coupons/date/{couponCode}/{expDate}")
+	public ResponseEntity<List<CouponDto>> getByCouponCodeAndExpDate(@PathVariable("couponCode") String couponCode,
+			@PathVariable("expDate") String expDate) {
+		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCodeAndExpDate(couponCode, expDate),
+				HttpStatus.OK);
+	}
+
+	@GetMapping("coupons/order/{couponCode}")
+	public ResponseEntity<List<CouponDto>> getByCouponCodeOrderByCouponPrice(
+			@PathVariable("couponCode") String couponCode) {
+		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCodeOrderByCouponPrice(couponCode),
+				HttpStatus.OK);
 	}
 }
