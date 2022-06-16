@@ -8,11 +8,22 @@ import com.zensar.springbootDemo.entity.Student;
 public interface StudentService {
 	public StudentDto getStudent(int studentId);
 
-	public List<StudentDto> getStudents();
+	public List<StudentDto> getStudents(int pageNumber, int pageSize);
 
 	public StudentDto insertStudent(StudentDto studentdto);
 
 	public void deleteStudent(int studentId);
 
 	public StudentDto updateStudent(int studentId, StudentDto studentDto);
+
+	public List<StudentDto> getByStudentName(String studentName);
+
+	public List<StudentDto> getByStudentNameAndStudentAge(String studentName, int age);
+
+	public List<StudentDto> getByStudentNameOrStudentAge(String studentName, int age);
+
+	public List<StudentDto> getByStudentNameEndsWith(String suffix);
+
+	public List<StudentDto> findByStudentNameOrderBy(String studentName);
+
 }
