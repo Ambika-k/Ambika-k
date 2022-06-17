@@ -7,6 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.zensar.ide.dto.CouponDto;
@@ -33,10 +35,12 @@ public class CouponServiceImpl implements CouponService {
 
 	@Override
 	//public List<CouponDto> getCoupons() {
-	public List<CouponDto> getCoupons(int pageNumber,int pageSize) {
+	public List<CouponDto> getCoupons(int pageNumber,int pageSize,String sortBy,Direction dir) {
 		//List<Coupon> listOfCoupons = couponRepository.findAll();
 		//Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(1, 5));
-		Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber,pageSize));
+		//Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber,pageSize));
+		//Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber,pageSize,Sort.by(Direction.DESC,"couponCode")));
+		Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber,pageSize,dir,sortBy));
 		List<Coupon> content = findAll.getContent();
 		List<CouponDto> listOfCouponDto = new ArrayList<CouponDto>();
 		/*

@@ -1,6 +1,6 @@
 
 server:
-  port: 4444
+  port: 1111
 spring:
   datasource:
     url:  jdbc:mysql://localhost:3306/javabatch
@@ -13,5 +13,3 @@ spring:
     properties:
      hibernate:
       format_sql: true
-      
-    

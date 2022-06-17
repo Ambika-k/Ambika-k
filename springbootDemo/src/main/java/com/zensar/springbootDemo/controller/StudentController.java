@@ -1,6 +1,7 @@
 package com.zensar.springbootDemo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +45,8 @@ public class StudentController {
 	// RequestMethod.GET)
 	@GetMapping(value = "/students")
 	public ResponseEntity<List<StudentDto>> getStudents(@RequestParam(value="pageNumber",required = false,defaultValue = "0") int pageNumber,
-			@RequestParam(value="pageSize",required = false,defaultValue = "10") int pageSize) {
-		return new ResponseEntity<List<StudentDto>>(studentService.getStudents(pageNumber, pageSize), HttpStatus.OK);
+			@RequestParam(value="pageSize",required = false,defaultValue = "10") int pageSize,@RequestParam(value="sortBy",required=false,defaultValue="studentName")String sortBy,@RequestParam(value="dir",required=false,defaultValue="DESC")Direction dir) {
+		return new ResponseEntity<List<StudentDto>>(studentService.getStudents(pageNumber, pageSize,sortBy,dir), HttpStatus.OK);
 		// return studentService.getStudents();
 	}
 

@@ -1,16 +1,18 @@
 package com.zensar.springbootDemo.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import com.zensar.springbootDemo.dto.StudentDto;
 import com.zensar.springbootDemo.entity.Student;
 import com.zensar.springbootDemo.repository.StudentRepository;
+import org.springframework.data.domain.Sort.Direction;   // important one
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -32,9 +34,10 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<StudentDto> getStudents(int pageNumber, int pageSize) {
+	public List<StudentDto> getStudents(int pageNumber, int pageSize,String sortBy,Direction dir) {
 		// List<Student> listOfStudents = studentRepository.findAll();
-		Page<Student> findAll = studentRepository.findAll(PageRequest.of(pageNumber, pageSize));
+		//Page<Student> findAll = studentRepository.findAll(PageRequest.of(pageNumber, pageSize,Sort.by(Direction.DESC,"studentName")));
+		Page<Student> findAll = studentRepository.findAll(PageRequest.of(pageNumber, pageSize,dir,sortBy));
 		List<Student> content = findAll.getContent();
 		List<StudentDto> listOfStudentDto = new ArrayList<StudentDto>();
 		for (Student student : content) {
