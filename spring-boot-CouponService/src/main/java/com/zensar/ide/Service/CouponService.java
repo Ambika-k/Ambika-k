@@ -9,8 +9,8 @@ import com.zensar.ide.dto.CouponDto;
 public interface CouponService {
 	public CouponDto getCoupon(int CouponId);
 
-	//public List<CouponDto> getCoupons();
-	public List<CouponDto> getCoupons(int pageNumber,int pageSize,String sortBy,Direction dir);
+	// public List<CouponDto> getCoupons();
+	public List<CouponDto> getCoupons(int pageNumber, int pageSize, String sortBy, Direction dir);
 
 	public CouponDto insertCoupon(CouponDto couponDto);
 

@@ -42,10 +42,15 @@ public class CouponController {
 //			MediaType.APPLICATION_XML_VALUE })
 	@GetMapping(value = "/coupons/")
 	// public List<CouponDto> getCoupons() {
-	//public ResponseEntity<List<CouponDto>> getCoupons() {
-	public ResponseEntity<List<CouponDto>> getCoupons(@RequestParam(value="pageNumber",required=false,defaultValue="0")int pageNumber,@RequestParam(value="pageSize",required = false,defaultValue = "3")int pageSize,@RequestParam(value="sortBy",required = false,defaultValue = "couponPrice")String sortBy,@RequestParam(value="dir",required = false,defaultValue = "DESC")Direction dir) {
+	// public ResponseEntity<List<CouponDto>> getCoupons() {
+	public ResponseEntity<List<CouponDto>> getCoupons(
+			@RequestParam(value = "pageNumber", required = false, defaultValue = "0") int pageNumber,
+			@RequestParam(value = "pageSize", required = false, defaultValue = "3") int pageSize,
+			@RequestParam(value = "sortBy", required = false, defaultValue = "couponPrice") String sortBy,
+			@RequestParam(value = "dir", required = false, defaultValue = "DESC") Direction dir) {
 		// return couponService.getCoupons();
-		return new ResponseEntity<List<CouponDto>>(couponService.getCoupons(pageNumber,pageSize,sortBy,dir), HttpStatus.OK);
+		return new ResponseEntity<List<CouponDto>>(couponService.getCoupons(pageNumber, pageSize, sortBy, dir),
+				HttpStatus.OK);
 	}
 
 //	@PostMapping(value = "/coupons",consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
@@ -66,7 +71,8 @@ public class CouponController {
 		couponService.updateCoupon(CouponId, couponDto);
 		return new ResponseEntity<String>("Coupon updated Succesfully", HttpStatus.OK);
 
-	} //@RequestBody is used to retrieve the record inserted in postman and by using update method we update it to Student Entity.
+	} // @RequestBody is used to retrieve the record inserted in postman and by using
+		// update method we update it to Student Entity.
 
 	@DeleteMapping("coupons/{couponId}")
 	// public void deleteCoupon(@PathVariable("couponId") int CouponId) {
@@ -80,21 +86,22 @@ public class CouponController {
 		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCode(couponCode), HttpStatus.OK);
 	}
 
-	@GetMapping("coupons/{couponCode}/{couponPrice}")    // @PathVariable is used to get the value from url in postman.
+	@GetMapping("coupons/{couponCode}/{couponPrice}") // @PathVariable is used to get the value from url in postman.
 	public ResponseEntity<List<CouponDto>> getByCouponCodeOrCouponPrice(@PathVariable("couponCode") String couponCode,
 			@PathVariable("couponPrice") int couponPrice) {
 		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCodeOrCouponPrice(couponCode, couponPrice),
 				HttpStatus.OK);
 	}
 
-	@GetMapping("coupons/date/{couponCode}/{expDate}")  
+	@GetMapping("coupons/date/{couponCode}/{expDate}")
 	public ResponseEntity<List<CouponDto>> getByCouponCodeAndExpDate(@PathVariable("couponCode") String couponCode,
 			@PathVariable("expDate") String expDate) {
 		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCodeAndExpDate(couponCode, expDate),
-				HttpStatus.OK);  // HttpStatus.{OK,CREATED etc } can be used based on the operation.
+				HttpStatus.OK); // HttpStatus.{OK,CREATED etc } can be used based on the operation.
 	}
-    // ResponseEntity used to manipulate HTTP Response 
-	@GetMapping("coupons/order/{couponCode}")  // value in this annotation represents endpoint
+
+	// ResponseEntity used to manipulate HTTP Response
+	@GetMapping("coupons/order/{couponCode}") // value in this annotation represents endpoint
 	public ResponseEntity<List<CouponDto>> getByCouponCodeOrderByCouponPrice(
 			@PathVariable("couponCode") String couponCode) {
 		return new ResponseEntity<List<CouponDto>>(couponService.getByCouponCodeOrderByCouponPrice(couponCode),

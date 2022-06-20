@@ -29,18 +29,20 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public CouponDto getCoupon(int couponId) {
 		Coupon getCoupon = couponRepository.findById(couponId).get();
-		return modelMapper.map(getCoupon,CouponDto.class);
+		return modelMapper.map(getCoupon, CouponDto.class);
 		// return mapToDto(getCoupon);
 	}
 
 	@Override
-	//public List<CouponDto> getCoupons() {
-	public List<CouponDto> getCoupons(int pageNumber,int pageSize,String sortBy,Direction dir) {
-		//List<Coupon> listOfCoupons = couponRepository.findAll();
-		//Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(1, 5));
-		//Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber,pageSize));
-		//Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber,pageSize,Sort.by(Direction.DESC,"couponCode")));
-		Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber,pageSize,dir,sortBy));
+	// public List<CouponDto> getCoupons() {
+	public List<CouponDto> getCoupons(int pageNumber, int pageSize, String sortBy, Direction dir) {
+		// List<Coupon> listOfCoupons = couponRepository.findAll();
+		// Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(1, 5));
+		// Page<Coupon> findAll =
+		// couponRepository.findAll(PageRequest.of(pageNumber,pageSize));
+		// Page<Coupon> findAll =
+		// couponRepository.findAll(PageRequest.of(pageNumber,pageSize,Sort.by(Direction.DESC,"couponCode")));
+		Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber, pageSize, dir, sortBy));
 		List<Coupon> content = findAll.getContent();
 		List<CouponDto> listOfCouponDto = new ArrayList<CouponDto>();
 		/*
@@ -48,8 +50,8 @@ public class CouponServiceImpl implements CouponService {
 		 * //listOfCouponDto.add(mapToDto(coupon));
 		 * listOfCouponDto.add(modelMapper.map(coupon,CouponDto.class)); }
 		 */
-		for(Coupon coupon:content) 
-			listOfCouponDto.add(modelMapper.map(coupon,CouponDto.class));
+		for (Coupon coupon : content)
+			listOfCouponDto.add(modelMapper.map(coupon, CouponDto.class));
 		return listOfCouponDto;
 	}
 
@@ -62,11 +64,11 @@ public class CouponServiceImpl implements CouponService {
 		 * coupon.setCouponPrice(couponDto.getCouponPrice());
 		 * coupon.setCouponDesc(couponDto.getCouponDesc());
 		 */
-		//Coupon coupon = mapToEntity(couponDto);
-		Coupon coupon = modelMapper.map(couponDto,Coupon.class);
+		// Coupon coupon = mapToEntity(couponDto);
+		Coupon coupon = modelMapper.map(couponDto, Coupon.class);
 		Coupon insertedCoupon = couponRepository.save(coupon);
-		//return mapToDto(insertedCoupon);
-		return modelMapper.map(insertedCoupon,CouponDto.class);
+		// return mapToDto(insertedCoupon);
+		return modelMapper.map(insertedCoupon, CouponDto.class);
 
 	}
 
@@ -79,8 +81,8 @@ public class CouponServiceImpl implements CouponService {
 		 * coupon.setCouponPrice(couponDto.getCouponPrice());
 		 * coupon.setCouponDesc(couponDto.getCouponDesc());
 		 */
-		//Coupon coupon = mapToEntity(couponDto);
-		Coupon coupon = modelMapper.map(couponDto,Coupon.class);
+		// Coupon coupon = mapToEntity(couponDto);
+		Coupon coupon = modelMapper.map(couponDto, Coupon.class);
 		couponRepository.save(coupon);
 
 	}
@@ -93,11 +95,12 @@ public class CouponServiceImpl implements CouponService {
 
 	@Override
 	public List<CouponDto> getByCouponCode(String couponCode) {
-		//List<Coupon> findBycouponCode = couponRepository.findByCouponCode(couponCode);
+		// List<Coupon> findBycouponCode =
+		// couponRepository.findByCouponCode(couponCode);
 		List<Coupon> findBycouponCode = couponRepository.test(couponCode);
 		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
-		for(Coupon coupon:findBycouponCode)
-			couponDtos.add(modelMapper.map(coupon,CouponDto.class));
+		for (Coupon coupon : findBycouponCode)
+			couponDtos.add(modelMapper.map(coupon, CouponDto.class));
 		return couponDtos;
 	}
 
@@ -105,18 +108,19 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponDto> getByCouponCodeOrCouponPrice(String couponCode, int price) {
 		List<Coupon> findBycouponCode = couponRepository.findByCouponCodeOrCouponPrice(couponCode, price);
 		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
-		for(Coupon coupon:findBycouponCode)
-			couponDtos.add(modelMapper.map(coupon,CouponDto.class));
+		for (Coupon coupon : findBycouponCode)
+			couponDtos.add(modelMapper.map(coupon, CouponDto.class));
 		return couponDtos;
 	}
 
 	@Override
 	public List<CouponDto> getByCouponCodeAndExpDate(String couponCode, String expDate) {
-		//List<Coupon> findBycouponCode = couponRepository.findByCouponCodeAndExpDate(couponCode, expDate);
-		List<Coupon> findBycouponCode = couponRepository.test1(couponCode,expDate);
+		// List<Coupon> findBycouponCode =
+		// couponRepository.findByCouponCodeAndExpDate(couponCode, expDate);
+		List<Coupon> findBycouponCode = couponRepository.test1(couponCode, expDate);
 		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
-		for(Coupon coupon:findBycouponCode)
-			couponDtos.add(modelMapper.map(coupon,CouponDto.class));
+		for (Coupon coupon : findBycouponCode)
+			couponDtos.add(modelMapper.map(coupon, CouponDto.class));
 		return couponDtos;
 	}
 
@@ -124,12 +128,10 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponDto> getByCouponCodeOrderByCouponPrice(String couponCode) {
 		List<Coupon> findBycouponCode = couponRepository.findByCouponCodeOrderByCouponPrice(couponCode);
 		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
-		for(Coupon coupon:findBycouponCode)
-			couponDtos.add(modelMapper.map(coupon,CouponDto.class));
+		for (Coupon coupon : findBycouponCode)
+			couponDtos.add(modelMapper.map(coupon, CouponDto.class));
 		return couponDtos;
 	}
-
-
 
 	/*
 	 * public Coupon mapToEntity(CouponDto couponDto) { Coupon coupon = new
