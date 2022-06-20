@@ -1,4 +1,4 @@
-package com.zensar.springbootDemo;
+package com.zensar.ide;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -10,20 +10,22 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"test","com.zensar"})
-public class SpringbootDemoApplication extends SpringBootServletInitializer{
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		// TODO Auto-generated method stub
-		return super.configure(builder);
-	}
+//public class SpringBootProductServiceApplication extends SpringBootServletInitializer {
+public class SpringBootProductServiceApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootDemoApplication.class, args);
+		SpringApplication.run(SpringBootProductServiceApplication.class, args);
 	}
+
 	@Bean
 	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
-	
-	
+
+	/*
+	 * @Override protected SpringApplicationBuilder
+	 * configure(SpringApplicationBuilder builder) {
+	 * 
+	 * return super.configure(builder); }
+	 */
+
 }
