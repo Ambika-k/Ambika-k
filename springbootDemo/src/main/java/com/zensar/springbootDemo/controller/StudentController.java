@@ -22,10 +22,10 @@ import com.zensar.springbootDemo.dto.StudentDto;
 import com.zensar.springbootDemo.entity.Student;
 import com.zensar.springbootDemo.service.StudentService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
-@RequestMapping(value = "/student-api", produces = { MediaType.APPLICATION_JSON_VALUE,
-		MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
-				MediaType.APPLICATION_XML_VALUE })
+@RequestMapping(value = "/student-api")
 public class StudentController {
 	@Autowired
 	private StudentService studentService;
@@ -35,6 +35,8 @@ public class StudentController {
 	}
 
 	// @RequestMapping("/students/{studentId}")
+	@Operation
+	
 	@GetMapping(value = "/students/{studentId}")
 	public ResponseEntity<StudentDto> getStudent(@PathVariable("studentId") int studentId) {
 		return new ResponseEntity<StudentDto>(studentService.getStudent(studentId), HttpStatus.OK);

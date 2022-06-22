@@ -20,13 +20,14 @@ import com.zensar.ide.dto.ProductDto;
 import com.zensar.ide.service.ProductService;
 
 @RestController
-@RequestMapping(value = "/product-api", produces = { MediaType.APPLICATION_JSON_VALUE,
-		MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
-				MediaType.APPLICATION_XML_VALUE })
+/*
+ * @RequestMapping(value = "/product-api", produces = {
+ * MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, consumes
+ * = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+ */
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-
 	@GetMapping("/products/{productId}")
 	public ResponseEntity<ProductDto> getProduct(@PathVariable("productId") int productId) {
 		return new ResponseEntity<ProductDto>(productService.getProduct(productId), HttpStatus.OK);
