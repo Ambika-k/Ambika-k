@@ -22,9 +22,11 @@ import com.zensar.ide.dto.CouponDto;
 import com.zensar.ide.entity.Coupon;
 
 @RestController
-@RequestMapping(value = "/coupon-api", produces = { MediaType.APPLICATION_JSON_VALUE,
-		MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
-				MediaType.APPLICATION_XML_VALUE })
+/*
+ * @RequestMapping(value = "/coupon-api", produces = {
+ * MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, consumes
+ * = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+ */
 public class CouponController {
 	@Autowired
 	private CouponService couponService;

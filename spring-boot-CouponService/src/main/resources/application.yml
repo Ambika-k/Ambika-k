@@ -13,3 +13,23 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL5Dialect
+        
+        
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
+      base-path: /myactuator
+      
+      
+  info:
+    env:
+      enabled: true
+      
+  
+logging:
+  level:
+    com:
+     zensar: debug
