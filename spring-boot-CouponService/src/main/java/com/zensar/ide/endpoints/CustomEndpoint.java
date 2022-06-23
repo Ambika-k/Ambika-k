@@ -13,35 +13,35 @@ import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.stereotype.Component;
 
 @Component
-@Endpoint(id = "course-details")
+@Endpoint(id = "coupon-details")
 public class CustomEndpoint {
-	private Map<Integer, String> courseDetails = new HashMap<>();
+	private Map<String, Integer> couponDetails = new HashMap<>();
 
 	@PostConstruct
 	public void init() {
-		courseDetails.put(1, "Java");
-		courseDetails.put(2, "DotNet");
+		couponDetails.put("CouponsPrinted",500);
+		couponDetails.put("CouponsRejected",50);
 	}
 
 	@ReadOperation
-	public Map<Integer, String> getAllCourses() {
-		return courseDetails;
+	public Map<String, Integer> getAllCourses() {
+		return couponDetails;
 
 	}
 
 	@ReadOperation
-	public String getCourseById(@Selector int id) {
-		return courseDetails.get(id);
+	public int getCouponBySection(@Selector String section) {
+		return couponDetails.get(section);
 
 	}
 
 	@WriteOperation
-	public void addCourse(@Selector int id, @Selector String course) {
-		courseDetails.put(id, course);
+	public void addCourse(@Selector String section, @Selector int count) {
+		couponDetails.put(section, count);
 	}
 
 	@DeleteOperation
-	public void deleteCourse(@Selector int id) {
-		courseDetails.remove(id);
+	public void deleteCourse(@Selector String section) {
+		couponDetails.remove(section);
 	}
 }
