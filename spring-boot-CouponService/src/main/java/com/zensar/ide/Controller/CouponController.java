@@ -30,6 +30,31 @@ import com.zensar.ide.entity.Coupon;
 public class CouponController {
 	@Autowired
 	private CouponService couponService;
+	
+	/*
+	 * @ExceptionHandler(value = CouponAlreadyExistsException.class)
+	 * 
+	 * @ResponseStatus(HttpStatus.CONFLICT) public ErrorResponse
+	 * handleCouponAlreadyExistsException(CouponAlreadyExistsException ex) {
+	 * return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage()); }
+	 */
+	  
+	/*
+	 * @ExceptionHandler(value = NoSuchCouponExistsException.class)
+	 * 
+	 * @ResponseStatus(HttpStatus.NOT_FOUND) public ErrorResponse
+	 * handleNoSuchCouponExistsException(NoSuchCouponExistsException ex) { return
+	 * new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()); }
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 //	@GetMapping(value = "/coupon/{couponId}",produces = { MediaType.APPLICATION_JSON_VALUE,
 //			MediaType.APPLICATION_XML_VALUE })

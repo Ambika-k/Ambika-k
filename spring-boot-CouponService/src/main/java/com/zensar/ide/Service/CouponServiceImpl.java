@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.zensar.ide.dto.CouponDto;
 import com.zensar.ide.entity.Coupon;
+import com.zensar.ide.exceptions.CouponAlreadyExistsException;
+import com.zensar.ide.exceptions.NoSuchCouponExistsException;
 import com.zensar.ide.repository.CouponRepository;
 
 @Service
@@ -28,7 +30,9 @@ public class CouponServiceImpl implements CouponService {
 
 	@Override
 	public CouponDto getCoupon(int couponId) {
-		Coupon getCoupon = couponRepository.findById(couponId).get();
+		Coupon getCoupon = couponRepository.findById(couponId).orElse(null);
+		if(getCoupon == null)
+			throw new NoSuchCouponExistsException("Coupon doesnt exists");
 		return modelMapper.map(getCoupon, CouponDto.class);
 		// return mapToDto(getCoupon);
 	}
@@ -66,9 +70,14 @@ public class CouponServiceImpl implements CouponService {
 		 */
 		// Coupon coupon = mapToEntity(couponDto);
 		Coupon coupon = modelMapper.map(couponDto, Coupon.class);
-		Coupon insertedCoupon = couponRepository.save(coupon);
-		// return mapToDto(insertedCoupon);
-		return modelMapper.map(insertedCoupon, CouponDto.class);
+		Coupon getCoupon = couponRepository.findById(coupon.getCouponId()).orElse(null);
+		if(getCoupon == null) {
+			Coupon insertedCoupon = couponRepository.save(coupon);
+			// return mapToDto(insertedCoupon);
+			return modelMapper.map(insertedCoupon, CouponDto.class);
+		}
+		else
+			throw new CouponAlreadyExistsException("Coupon already exists");
 
 	}
 
@@ -82,6 +91,9 @@ public class CouponServiceImpl implements CouponService {
 		 * coupon.setCouponDesc(couponDto.getCouponDesc());
 		 */
 		// Coupon coupon = mapToEntity(couponDto);
+		Coupon getCoupon = couponRepository.findById(couponId).orElse(null);
+		if(getCoupon == null)
+			throw new NoSuchCouponExistsException("Coupon doesn't exists");
 		Coupon coupon = modelMapper.map(couponDto, Coupon.class);
 		couponRepository.save(coupon);
 
