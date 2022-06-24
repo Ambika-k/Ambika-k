@@ -10,7 +10,8 @@ spring:
     ddl-auto: create
 
       
-
+  application:
+    name: coupon-service
     
 
   
