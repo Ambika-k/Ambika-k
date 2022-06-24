@@ -8,16 +8,18 @@ spring:
     password: Ambika@91
   jpa:
    hibernate:
-    ddl-auto: create
+    ddl-auto: update
 
   
-  
+  application:
+    name: product-service
 
  
 
-      
-
-
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
       
       
     

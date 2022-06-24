@@ -7,11 +7,19 @@ spring:
     password: Ambika@91
   jpa:
    hibernate:
-    ddl-auto: create
+    ddl-auto: update
 
       
   application:
     name: coupon-service
+    
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+    
+    service-url:
+      defaultzone: http://localhost:8761/eureka
     
 
   
