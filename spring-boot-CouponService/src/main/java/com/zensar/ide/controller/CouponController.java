@@ -1,4 +1,4 @@
-package com.zensar.ide.Controller;
+package com.zensar.ide.controller;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zensar.ide.Service.CouponService;
 import com.zensar.ide.dto.CouponDto;
 import com.zensar.ide.entity.Coupon;
+import com.zensar.ide.service.CouponService;
 
 @RestController
 /*

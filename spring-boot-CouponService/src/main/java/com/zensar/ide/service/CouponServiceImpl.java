@@ -1,4 +1,4 @@
-package com.zensar.ide.Service;
+package com.zensar.ide.service;
 
 import java.util.ArrayList;
 import java.util.List;

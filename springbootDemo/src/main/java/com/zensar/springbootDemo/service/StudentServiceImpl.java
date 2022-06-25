@@ -9,11 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import com.zensar.springbootDemo.dto.StudentDto;
 import com.zensar.springbootDemo.entity.Student;
 import com.zensar.springbootDemo.exceptions.NoSuchStudentExistsException;
 import com.zensar.springbootDemo.exceptions.StudentAlreadyExistsException;
 import com.zensar.springbootDemo.repository.StudentRepository;
+
 import org.springframework.data.domain.Sort.Direction;   // important one
 
 @Service
@@ -55,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
 	public StudentDto insertStudent(StudentDto studentDto) {
 		// Student student = mapToEntity(studentDto);
 		Student student = modelMapper.map(studentDto, Student.class);
-		Student getStudent = studentRepository.findById(student.getStudentId()).get();
+		Student getStudent = studentRepository.findById(student.getStudentId()).orElse(null);
 		if(getStudent == null) {
 			Student insertedStudent = studentRepository.save(student);
 			// StudentDto maptoDto = mapToDto(insertedStudent);

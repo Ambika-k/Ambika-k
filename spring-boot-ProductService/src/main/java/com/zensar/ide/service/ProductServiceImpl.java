@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort.Direction;
 import com.zensar.ide.dto.ProductDto;
 import com.zensar.ide.entity.Product;
+import com.zensar.ide.exceptions.NoSuchProductExistsException;
+import com.zensar.ide.exceptions.ProductAlreadyExistsException;
 import com.zensar.ide.repository.ProductRepository;
 
 @Service
@@ -23,7 +25,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductDto getProduct(int productId) {
-		Product product = productRepository.findById(productId).get();
+		Product product = productRepository.findById(productId).orElse(null);
+		if(product == null) {
+			throw new NoSuchProductExistsException("Product doesn't exists");
+		}
 		return modelMapper.map(product, ProductDto.class);
 	}
 
@@ -41,17 +46,31 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductDto insert(ProductDto productDto) {
-		productRepository.save(modelMapper.map(productDto, Product.class));
-		return productDto;
+		Product product = modelMapper.map(productDto,Product.class);
+		Product getProduct = productRepository.findById(product.getProductId()).orElse(null);
+		if(getProduct==null) {
+			productRepository.save(modelMapper.map(productDto, Product.class));
+			return productDto;
+		}
+		else {
+			throw new ProductAlreadyExistsException("Product already exists");
+		}
+		
 	}
 
 	@Override
 	public void update(int productId, ProductDto productDto) {
+		Product getProduct = productRepository.findById(productId).orElse(null);
+		if(getProduct==null)
+			throw new NoSuchProductExistsException("Product doesn't exists to update it");
 		productRepository.save(modelMapper.map(productDto, Product.class));
 	}
 
 	@Override
 	public void delete(int productId) {
+		Product getProduct = productRepository.findById(productId).orElse(null);
+		if(getProduct==null)
+			throw new NoSuchProductExistsException("Product doesn't exists to delete it");
 		productRepository.deleteById(productId);
 	}
 
