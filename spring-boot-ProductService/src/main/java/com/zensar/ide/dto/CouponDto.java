@@ -1,11 +1,13 @@
 package com.zensar.ide.dto;
 
-import lombok.AllArgsConstructor;
+import javax.persistence.Entity;
+
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class CouponDto {
 	private int couponId;
@@ -15,4 +17,5 @@ public class CouponDto {
 	private String couponDesc;
 	private int discount;
 	
+
 }

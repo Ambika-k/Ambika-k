@@ -17,6 +17,7 @@ spring:
 
 
 
+
 management:
   endpoints:
     web:
@@ -45,4 +46,10 @@ logging:
     com:
      zensar: debug
   
+  
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    
         

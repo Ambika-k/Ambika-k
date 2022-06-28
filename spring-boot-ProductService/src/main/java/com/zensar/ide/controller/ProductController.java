@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.zensar.ide.dto.CouponDto;
 import com.zensar.ide.dto.ProductDto;
+import com.zensar.ide.restclient.CouponRestClient;
 import com.zensar.ide.service.ProductService;
 
 @RestController
@@ -28,21 +31,38 @@ import com.zensar.ide.service.ProductService;
 public class ProductController {
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private CouponRestClient restClient;
+
 	@GetMapping("/products/{productId}")
 	public ResponseEntity<ProductDto> getProduct(@PathVariable("productId") int productId) {
 		return new ResponseEntity<ProductDto>(productService.getProduct(productId), HttpStatus.OK);
 	}
 
 	@GetMapping("/products")
-	public ResponseEntity<List<ProductDto>> getProducts(@RequestParam(value="pageNumber",required = false,defaultValue = "0")int pageNumber,@RequestParam(value="pageSize",required = false,defaultValue = "10")int pageSize,@RequestParam(value="sortBy",required=false,defaultValue = "productId")String sortBy,@RequestParam(value="dir",required = false,defaultValue = "DESC")Direction dir) {
-		//return new ResponseEntity<List<ProductDto>>(productService.getProducts(pageNumber,pageSize), HttpStatus.OK);
-		return new ResponseEntity<List<ProductDto>>(productService.getProducts(pageNumber,pageSize,sortBy,dir), HttpStatus.OK);
+	public ResponseEntity<List<ProductDto>> getProducts(
+			@RequestParam(value = "pageNumber", required = false, defaultValue = "0") int pageNumber,
+			@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+			@RequestParam(value = "sortBy", required = false, defaultValue = "productId") String sortBy,
+			@RequestParam(value = "dir", required = false, defaultValue = "DESC") Direction dir) {
+		// return new
+		// ResponseEntity<List<ProductDto>>(productService.getProducts(pageNumber,pageSize),
+		// HttpStatus.OK);
+		return new ResponseEntity<List<ProductDto>>(productService.getProducts(pageNumber, pageSize, sortBy, dir),
+				HttpStatus.OK);
 	}
 
 	@PostMapping("/products")
 	public ResponseEntity<ProductDto> insert(@RequestBody ProductDto productDto) {
+
+		//restClient.getCoupon(productDto.get)
+		CouponDto couponDto = restClient.getCoupon(productDto.getCouponCode());
+		productDto.setProductPrice(productDto.getProductPrice() - couponDto.getDiscount());
+
+		//return productService.insert(productDto);
 		return new ResponseEntity<ProductDto>(productService.insert(productDto), HttpStatus.CREATED);
-	}
+	} // connects with coupon service to access couponCode
 
 	@PutMapping("/products/{productId}")
 	public ResponseEntity<String> update(@PathVariable("productId") int productId, @RequestBody ProductDto product) {

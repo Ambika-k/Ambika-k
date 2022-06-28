@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.zensar.ide.entity.Coupon;
 
 public interface CouponRepository extends JpaRepository<Coupon, Integer> {
-	List<Coupon> findByCouponCode(String couponCode);
+	Coupon findByCouponCode(String couponCode);
 
 	List<Coupon> findByCouponCodeOrCouponPrice(String couponCode, int price);
 

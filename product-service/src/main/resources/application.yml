@@ -8,18 +8,26 @@ spring:
     password: Ambika@91
   jpa:
    hibernate:
-    ddl-auto: update
+    ddl-auto: create
 
   
   application:
     name: product-service
 
+  config:
+    import:
+    - optional:configserver:http://localhost:8888/
+
  
 
 eureka:
   client:
-    register-with-eureka: false
+    register-with-eureka: true
     fetch-registry: true
+    service-url:
+      defaultzone: http://localhost:8761/eureka     
+  instance:
+    prefer-ip-address: true
       
       
     

@@ -7,7 +7,8 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-import lombok.AllArgsConstructor;
+import com.zensar.ide.dto.ProductDto;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +19,6 @@ import lombok.NoArgsConstructor;
 //@NamedNativeQueries(value = { @NamedNativeQuery(name = "Coupon.test", query = "select * from coupon c where c.coupon_code=?1",resultClass = Coupon.class),
 //@NamedNativeQuery(name = "Coupon.test1", query = "select * from coupon c where c.coupon_code=?1 and c.exp_date=?2",resultClass = Coupon.class)})
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Coupon {
 	@Id
@@ -26,8 +26,8 @@ public class Coupon {
 	private String couponCode;
 	private String expDate;
 	private int couponPrice;
-	private int discount;
 	private String couponDesc;
+	private int discount;
 
 	
 }

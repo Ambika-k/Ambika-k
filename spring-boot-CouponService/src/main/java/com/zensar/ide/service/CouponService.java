@@ -18,7 +18,7 @@ public interface CouponService {
 
 	public void deleteCoupon(int CouponId);
 
-	public List<CouponDto> getByCouponCode(String couponCode);
+	public CouponDto getByCouponCode(String couponCode);
 
 	public List<CouponDto> getByCouponCodeOrCouponPrice(String couponCode, int price);
 

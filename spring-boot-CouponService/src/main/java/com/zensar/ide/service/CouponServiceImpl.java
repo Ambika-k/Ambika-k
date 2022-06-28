@@ -106,14 +106,15 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public List<CouponDto> getByCouponCode(String couponCode) {
+	public CouponDto getByCouponCode(String couponCode) {
 		// List<Coupon> findBycouponCode =
-		// couponRepository.findByCouponCode(couponCode);
-		List<Coupon> findBycouponCode = couponRepository.test(couponCode);
-		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
-		for (Coupon coupon : findBycouponCode)
-			couponDtos.add(modelMapper.map(coupon, CouponDto.class));
-		return couponDtos;
+		Coupon findByCouponCode = couponRepository.findByCouponCode(couponCode);
+		//List<Coupon> findBycouponCode = couponRepository.test(couponCode);
+		//List<CouponDto> couponDtos = new ArrayList<CouponDto>();
+		//for (Coupon coupon : findBycouponCode)
+			//couponDtos.add(modelMapper.map(coupon, CouponDto.class));
+		CouponDto couponDto = modelMapper.map(findByCouponCode,CouponDto.class);
+		return couponDto;
 	}
 
 	@Override
