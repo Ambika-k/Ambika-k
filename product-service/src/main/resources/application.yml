@@ -29,8 +29,12 @@ eureka:
   instance:
     prefer-ip-address: true
       
-      
-    
+resilience4j:
+  retry:
+    instances:
+      productapi:
+       max-attempts: 3
+       wait-duration: 20s 
       
       
     
