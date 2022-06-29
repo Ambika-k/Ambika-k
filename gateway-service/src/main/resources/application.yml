@@ -25,5 +25,16 @@ spring:
        predicates: 
        - Path=/products/**
        uri: lb://PRODUCT-SERVICE 
-     
+     - id: couponAppModule
+       predicates: 
+       - Path=/coupon-api/**
+       uri: lb://COUPON-SERVICE-APP
+     - id: productAppModule
+       predicates: 
+       - Path=/product-api/**
+       uri: lb://PRODUCT-SERVICE-APP
+  
+ zipkin:
+    base-url:  http://localhost:9411/
+    
   

@@ -8,6 +8,7 @@ import javax.persistence.Transient;
 
 import com.zensar.ide.dto.ProductDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 //		@NamedNativeQuery(name = "Product.byName", query = "select * from product p where p.product_name=?1",resultClass = Product.class),
 //		@NamedNativeQuery(name = "Product.byNameOrPrice", query = "select * from product p where p.product_name=?1 or p.product_price=?2",resultClass = Product.class) })
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class Product {
 	@Id

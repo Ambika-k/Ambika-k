@@ -28,6 +28,7 @@ import com.zensar.ide.service.ProductService;
  * MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, consumes
  * = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
  */
+@RequestMapping("product-api")
 public class ProductController {
 	@Autowired
 	private ProductService productService;

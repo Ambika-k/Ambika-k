@@ -27,6 +27,7 @@ import com.zensar.ide.service.CouponService;
  * MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, consumes
  * = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
  */
+@RequestMapping("coupon-api")
 public class CouponController {
 	@Autowired
 	private CouponService couponService;
@@ -108,9 +109,10 @@ public class CouponController {
 		return new ResponseEntity<String>("Coupon deleted Succesfully", HttpStatus.OK);
 	} // Here the string value will be displayed in postman when the record deleted.
 
-	@GetMapping("coupons/code/{couponCode}")
-	public ResponseEntity<CouponDto> getByCouponCode(@PathVariable("couponCode") String couponCode) {
-		return new ResponseEntity<CouponDto>(couponService.getByCouponCode(couponCode), HttpStatus.OK);
+	@GetMapping(value="coupons/code/{couponCode}",produces = { MediaType.APPLICATION_JSON_VALUE,
+		MediaType.APPLICATION_XML_VALUE })
+	public CouponDto getByCouponCode(@PathVariable("couponCode") String couponCode) {
+		return couponService.getByCouponCode(couponCode);
 	}// product service is calling this method.
 
 	@GetMapping("coupons/{couponCode}/{couponPrice}") // @PathVariable is used to get the value from url in postman.
