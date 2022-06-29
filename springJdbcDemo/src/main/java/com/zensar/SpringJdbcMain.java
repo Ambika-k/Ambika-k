@@ -14,6 +14,7 @@ public class SpringJdbcMain {
 		System.out.println("Application context loaded");
 		StudentRepositoryImpl studentRepositoryImpl = context.getBean("studentRepository", StudentRepositoryImpl.class);
 
+		// CREATE STUDENT 
 		Student student = new Student();
 		student.setStudentId(104);
 		student.setStudentName("rashi");
@@ -23,10 +24,14 @@ public class SpringJdbcMain {
 		// StudentRepository studentRepository = new StudentRepositoryImpl();
 		// studentRepository.insert(student);
 
+		// INSERT STUDENT
 		studentRepositoryImpl.insert(student);
+		// READ STUDENT
 		studentRepositoryImpl.findById(101);
 		studentRepositoryImpl.findByName("rashi");
+		// DELETE STUDENT
 		studentRepositoryImpl.deleteStudent(102);
+		// UPDATE STUDENT
 		studentRepositoryImpl.updateStudent(103,"Kavya");
 
 	}

@@ -14,7 +14,7 @@ public class StudentResultExtractor implements ResultSetExtractor<List<Student>>
 
 	public List<Student> extractData(ResultSet rs) throws SQLException, DataAccessException {
 		List<Student> studentList = new ArrayList<Student>();
-		
+		// TO EXTRACT THE STUDENT VALUES
 		while(rs.next()) {
 			Student student = new Student();
 			student.setStudentId(rs.getInt("studentId"));

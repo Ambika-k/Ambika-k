@@ -16,7 +16,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	// file
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate; // JDBCTEMPLATE CLASS
 
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
@@ -26,6 +26,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	//INSERT
 	public void insert(Student student) {
 
 		String sql = "INSERT INTO STUDENT VALUES(?,?,?,?)";
@@ -37,6 +38,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		System.out.println("Rows inserted " + noOfRowsInserted);
 	}
 
+	//READ
 	public List<Student> findById(int studentId) {
 		String sql = "SELECT * FROM STUDENT WHERE studentId=?";
 		List<Student> students = jdbcTemplate.query(sql, new StudentResultExtractor(), studentId);
@@ -44,6 +46,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		return students;
 	}
 
+	//UPDATE
 	public void updateStudent(int studentId,String studentName) {
 		String sql = "UPDATE student SET studentname=? WHERE studentId=?";
 
@@ -54,6 +57,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	}
 
+	//DELETE
 	public void deleteStudent(int studentId) {
 		String sql = "DELETE FROM student WHERE studentId=?";
 		Object args[] = {studentId};
@@ -62,6 +66,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	}
 
+	// READ
 	public List<Student> findByName(String studentName) {
 		String sql = "SELECT * FROM STUDENT WHERE studentName=?";
 		List<Student> students = jdbcTemplate.query(sql, new StudentResultExtractor(), studentName);
