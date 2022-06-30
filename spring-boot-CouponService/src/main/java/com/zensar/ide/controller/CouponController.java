@@ -112,6 +112,7 @@ public class CouponController {
 	@GetMapping(value="coupons/code/{couponCode}",produces = { MediaType.APPLICATION_JSON_VALUE,
 		MediaType.APPLICATION_XML_VALUE })
 	public CouponDto getByCouponCode(@PathVariable("couponCode") String couponCode) {
+		System.out.println("Coupons .....");
 		return couponService.getByCouponCode(couponCode);
 	}// product service is calling this method.
 
