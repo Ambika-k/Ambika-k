@@ -13,6 +13,10 @@ spring:
     properties:
      hibernate:
       format_sql: true
+    
+#spring.security.user.name
+#spring.security.user.password
+
 
 management:
   endpoints:
@@ -26,8 +30,9 @@ management:
   info:
     env:
       enabled: true
+ 
+#spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
       
-       
 #info:
 #  createdBy: Ambika
 #  modifiedBy: 22ndjune2022

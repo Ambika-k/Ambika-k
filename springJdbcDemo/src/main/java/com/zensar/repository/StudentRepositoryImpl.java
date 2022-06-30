@@ -12,11 +12,10 @@ import com.zensar.extractor.StudentResultExtractor;
 @Repository("studentRepository")
 public class StudentRepositoryImpl implements StudentRepository {
 
-	// private JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource()); //.xml
-	// file
+	// private JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource()); //bean was written 
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate; // JDBCTEMPLATE CLASS
+	private JdbcTemplate jdbcTemplate; // JDBCTEMPLATE bean autowired here  JDBCTEMPLATE class is in JDBC package
 
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
