@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 public class SpringbootDemoApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		System.out.println("Ram");
 		SpringApplication.run(SpringbootDemoApplication.class, args);
 	}
 	@Bean
