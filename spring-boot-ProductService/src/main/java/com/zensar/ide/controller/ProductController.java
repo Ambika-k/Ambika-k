@@ -56,6 +56,8 @@ public class ProductController {
 				HttpStatus.OK);
 	}
 
+	
+	// In this method productservice will connect with coupon service and retrieve the coupon details based on couponcode
 	@PostMapping("/products")
 	@Retry(name = "productapi",fallbackMethod = "myFallBackMethod")
 	public ResponseEntity<ProductDto> insert(@RequestBody ProductDto productDto) {
@@ -105,6 +107,9 @@ public class ProductController {
 		return new ResponseEntity<List<ProductDto>>(productService.getByProductNameOrderByProductQuantity(productName),
 				HttpStatus.OK);
 	}
+	
+	
+	//when insert method connects with coupon service but if coupon service is down then productservice will call this method.
 	public ResponseEntity<ProductDto> myFallbackMethod(Throwable t) {    // CircuitBreaker concept
 		return new ResponseEntity<ProductDto>(new ProductDto(), HttpStatus.OK);
 	}
