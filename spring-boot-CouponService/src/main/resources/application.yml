@@ -15,7 +15,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
   application:
     name: coupon-service-app
-    
+  config:
+    import:
+    - optional:configserver:http://localhost:8888/
     
     
 eureka:

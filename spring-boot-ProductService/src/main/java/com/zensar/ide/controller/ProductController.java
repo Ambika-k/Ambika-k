@@ -22,6 +22,8 @@ import com.zensar.ide.dto.ProductDto;
 import com.zensar.ide.restclient.CouponRestClient;
 import com.zensar.ide.service.ProductService;
 
+import io.github.resilience4j.retry.annotation.Retry;
+
 @RestController
 /*
  * @RequestMapping(value = "/product-api", produces = {
@@ -55,6 +57,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/products")
+	@Retry(name = "productapi",fallbackMethod = "myFallBackMethod")
 	public ResponseEntity<ProductDto> insert(@RequestBody ProductDto productDto) {
 
 		//restClient.getCoupon(productDto.get)
@@ -101,6 +104,9 @@ public class ProductController {
 			@PathVariable("productName") String productName) {
 		return new ResponseEntity<List<ProductDto>>(productService.getByProductNameOrderByProductQuantity(productName),
 				HttpStatus.OK);
+	}
+	public ResponseEntity<ProductDto> myFallbackMethod(Throwable t) {    // CircuitBreaker concept
+		return new ResponseEntity<ProductDto>(new ProductDto(), HttpStatus.OK);
 	}
 
 }

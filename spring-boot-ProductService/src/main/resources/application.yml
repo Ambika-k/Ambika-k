@@ -16,7 +16,9 @@ spring:
         database-platform: org.hibernate.dialect.MySQL5Dialect
   application:
     name: product-service-app
-
+  config:
+    import:
+    - optional:configserver:http://localhost:8888/
 
 
 
@@ -58,4 +60,14 @@ eureka:
       
   instance:
     prefer-ip-address: true
+    
+    
+resilience4j:
+  retry:
+    instances:
+      productapi:
+       max-attempts: 3
+       wait-duration: 20s 
+      
+      
         
