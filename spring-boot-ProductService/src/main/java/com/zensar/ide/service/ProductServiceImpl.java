@@ -26,6 +26,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDto getProduct(int productId) {
 		Product product = productRepository.findById(productId).orElse(null);
+		// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
 		if (product == null) {
 			throw new NoSuchProductExistsException("Product doesn't exists");
 		}
@@ -37,24 +38,22 @@ public class ProductServiceImpl implements ProductService {
 		// List<Product> findAll = productRepository.findAll();
 		// Page<Product> findAll =
 		// productRepository.findAll(PageRequest.of(pageNumber,pageSize,Sort.by(Direction.DESC,"productName")));
-		try {
+			if(productRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(dir, sortBy))).isEmpty())
+				// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
+				throw new NoSuchProductExistsException("product doesnt exists");
 			Page<Product> findAll = productRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(dir, sortBy)));
 			List<Product> content = findAll.getContent();
 			List<ProductDto> dto = new ArrayList<ProductDto>();
 			for (Product product : content)
 				dto.add(modelMapper.map(product, ProductDto.class));
 			return dto;
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
-		return null;
 		
 	}
 
 	@Override
 	public ProductDto insert(ProductDto productDto) {
 		Product product = modelMapper.map(productDto, Product.class);
+		// if an product already exists it throws an exception and call ProductAlreadyExists Exception method
 		Product getProduct = productRepository.findById(product.getProductId()).orElse(null);
 		if (getProduct == null) {
 			productRepository.save(modelMapper.map(productDto, Product.class));
@@ -68,6 +67,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void update(int productId, ProductDto productDto) {
 		Product getProduct = productRepository.findById(productId).orElse(null);
+		// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
 		if (getProduct == null)
 			throw new NoSuchProductExistsException("Product doesn't exists to update it");
 		productRepository.save(modelMapper.map(productDto, Product.class));
@@ -76,6 +76,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void delete(int productId) {
 		Product getProduct = productRepository.findById(productId).orElse(null);
+		// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
 		if (getProduct == null)
 			throw new NoSuchProductExistsException("Product doesn't exists to delete it");
 		productRepository.deleteById(productId);
@@ -84,64 +85,52 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductDto> getByProductName(String productName) {
 		//List<Product> findbyProductName = productRepository.findByProductName(productName);
-		try {
+			if(productRepository.byName(productName).isEmpty())
+				// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
+				throw new NoSuchProductExistsException("product doesnt exists");
 			List<Product> findbyProductName = productRepository.byName(productName);
 			List<ProductDto> productDtos = new ArrayList<ProductDto>();
 			for (Product product : findbyProductName)
 				productDtos.add(modelMapper.map(product, ProductDto.class));
 			return productDtos;
-		}
-		catch(NoSuchProductExistsException e) {
-			System.out.println(e);
-		}
-		return null;
 	}
 
 	@Override
 	public List<ProductDto> getByProductNameAndProductPrice(String productName, int productPrice) {
-		try {
-				List<Product> products = productRepository.findByProductNameAndProductPrice(productName, productPrice);
-				List<ProductDto> productDtos = new ArrayList<ProductDto>();
-				for (Product product : products)
-					productDtos.add(modelMapper.map(product, ProductDto.class));
-				return productDtos;
-		}
-		catch(NoSuchProductExistsException e) {
-			System.out.println(e);
-		}
-		return null;
+			if(productRepository.findByProductNameAndProductPrice(productName, productPrice).isEmpty()) 
+				// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
+				throw new NoSuchProductExistsException("product doesnt exists");
+			List<Product> products = productRepository.findByProductNameAndProductPrice(productName, productPrice);
+			List<ProductDto> productDtos = new ArrayList<ProductDto>();
+			for (Product product : products)
+			productDtos.add(modelMapper.map(product, ProductDto.class));
+			return productDtos;
 	}
 
 	@Override
 	public List<ProductDto> getByProductNameOrProductPrice(String productName, int productPrice) {
 		// List<Product> products =
 		// productRepository.findByProductNameOrProductPrice(productName, productPrice);
-		try {
+			if(productRepository.byNameOrPrice(productName, productPrice).isEmpty())
+				// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
+				throw new NoSuchProductExistsException("product doesnt exists");
 			List<Product> products = productRepository.byNameOrPrice(productName, productPrice);
 			List<ProductDto> productDtos = new ArrayList<ProductDto>();
 			for (Product product : products)
 				productDtos.add(modelMapper.map(product, ProductDto.class));
 			return productDtos;
-		}
-		catch(NoSuchProductExistsException e) {
-			System.out.println(e);
-		}
-		return null;
 	}
 
 	@Override
 	public List<ProductDto> getByProductNameOrderByProductQuantity(String productName) {
-		try {
-			List<Product> findbyProductName = productRepository.findByProductNameOrderByProductQuantity(productName);
-			List<ProductDto> productDtos = new ArrayList<ProductDto>();
-			for (Product product : findbyProductName)
-				productDtos.add(modelMapper.map(product, ProductDto.class));
-			return productDtos;
-		}
-		catch(NoSuchProductExistsException e) {
-			System.out.println(e);
-		}
-		return null;
+		if(productRepository.findByProductNameOrderByProductQuantity(productName).isEmpty())
+			// if there is no such product exists then it throws an error and calls NoSuchProductExistsException method
+			throw new NoSuchProductExistsException("product doesnt exists");
+		List<Product> findbyProductName = productRepository.findByProductNameOrderByProductQuantity(productName);
+		List<ProductDto> productDtos = new ArrayList<ProductDto>();
+		for (Product product : findbyProductName)
+			productDtos.add(modelMapper.map(product, ProductDto.class));
+		return productDtos;
 	}
 
 }

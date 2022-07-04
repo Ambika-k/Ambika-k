@@ -5,7 +5,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 @Component
 @RefreshScope
-public class MyConfig {
+public class MyConfig {    // accesses the properties thorugh config server
 	@Value("${code.applicableTo}")
 	private String applicableTo;
 

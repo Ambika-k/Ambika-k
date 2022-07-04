@@ -32,6 +32,7 @@ public class CouponServiceImpl implements CouponService {
 	public CouponDto getCoupon(int couponId) {
 		Coupon getCoupon = couponRepository.findById(couponId).orElse(null);
 		if(getCoupon == null)
+			// If coupon doesnt exists it throws an exception and calls NoSuchCouponExistsException
 			throw new NoSuchCouponExistsException("Coupon doesnt exists");
 		return modelMapper.map(getCoupon, CouponDto.class);
 		// return mapToDto(getCoupon);
@@ -46,6 +47,9 @@ public class CouponServiceImpl implements CouponService {
 		// couponRepository.findAll(PageRequest.of(pageNumber,pageSize));
 		// Page<Coupon> findAll =
 		// couponRepository.findAll(PageRequest.of(pageNumber,pageSize,Sort.by(Direction.DESC,"couponCode")));
+		if(couponRepository.findAll(PageRequest.of(pageNumber, pageSize, dir, sortBy)).isEmpty())
+			// If coupon doesnt exists it throws an exception and calls NoSuchCouponExistsException
+			throw new CouponAlreadyExistsException("Coupon already exists");
 		Page<Coupon> findAll = couponRepository.findAll(PageRequest.of(pageNumber, pageSize, dir, sortBy));
 		List<Coupon> content = findAll.getContent();
 		List<CouponDto> listOfCouponDto = new ArrayList<CouponDto>();
@@ -76,6 +80,7 @@ public class CouponServiceImpl implements CouponService {
 			// return mapToDto(insertedCoupon);
 			return modelMapper.map(insertedCoupon, CouponDto.class);
 		}
+		// If coupon already exists then it throws an exception and calls CouponAlreadyExistsException
 		else
 			throw new CouponAlreadyExistsException("Coupon already exists");
 
@@ -93,7 +98,8 @@ public class CouponServiceImpl implements CouponService {
 		// Coupon coupon = mapToEntity(couponDto);
 		Coupon getCoupon = couponRepository.findById(couponId).orElse(null);
 		if(getCoupon == null)
-			throw new NoSuchCouponExistsException("Coupon doesn't exists");
+			// If coupon doesnt exists it throws an exception and calls NoSuchCouponExistsException
+			throw new NoSuchCouponExistsException("Coupon doesn't exists to update it");
 		Coupon coupon = modelMapper.map(couponDto, Coupon.class);
 		couponRepository.save(coupon);
 
@@ -101,6 +107,10 @@ public class CouponServiceImpl implements CouponService {
 
 	@Override
 	public void deleteCoupon(int couponId) {
+		Coupon getCoupon = couponRepository.findById(couponId).orElse(null);
+		if(getCoupon == null)
+			// If coupon doesnt exists it throws an exception and calls NoSuchCouponExistsException
+			throw new NoSuchCouponExistsException("Coupon doesn't exists to delete it");
 		couponRepository.deleteById(couponId);
 
 	}
@@ -119,6 +129,9 @@ public class CouponServiceImpl implements CouponService {
 
 	@Override
 	public List<CouponDto> getByCouponCodeOrCouponPrice(String couponCode, int price) {
+		if(couponRepository.findByCouponCodeOrCouponPrice(couponCode, price).isEmpty())
+			// If coupon doesnt exists it throws an exception and calls NoSuchCouponExistsException
+			throw new NoSuchCouponExistsException("Coupon doesn't exists");
 		List<Coupon> findBycouponCode = couponRepository.findByCouponCodeOrCouponPrice(couponCode, price);
 		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
 		for (Coupon coupon : findBycouponCode)
@@ -130,6 +143,9 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponDto> getByCouponCodeAndExpDate(String couponCode, String expDate) {
 		// List<Coupon> findBycouponCode =
 		// couponRepository.findByCouponCodeAndExpDate(couponCode, expDate);
+		if(couponRepository.test1(couponCode, expDate).isEmpty())
+			// If coupon doesnt exists it throws an exception and calls NoSuchCouponExistsException
+			throw new NoSuchCouponExistsException("Coupon doesn't exists");
 		List<Coupon> findBycouponCode = couponRepository.test1(couponCode, expDate);
 		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
 		for (Coupon coupon : findBycouponCode)
@@ -139,6 +155,9 @@ public class CouponServiceImpl implements CouponService {
 
 	@Override
 	public List<CouponDto> getByCouponCodeOrderByCouponPrice(String couponCode) {
+		if(couponRepository.findByCouponCodeOrderByCouponPrice(couponCode).isEmpty())
+			// If coupon doesnt exists it throws an exception and calls NoSuchCouponExistsException
+			throw new NoSuchCouponExistsException("Coupon doesn't exists");
 		List<Coupon> findBycouponCode = couponRepository.findByCouponCodeOrderByCouponPrice(couponCode);
 		List<CouponDto> couponDtos = new ArrayList<CouponDto>();
 		for (Coupon coupon : findBycouponCode)

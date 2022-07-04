@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 @OpenAPIDefinition
 @EnableEurekaClient
 @RestController
-@RefreshScope
+@RefreshScope  // used to update coupon service automatically when the file in which configurations stroed will be updated 
 public class SpringBootCouponServiceApplication {
 	/*
 	 * public class SpringBootCouponServiceApplication extends
@@ -29,16 +29,16 @@ public class SpringBootCouponServiceApplication {
 	 * return super.configure(builder); }
 	 */
 	@Value("${code.myOffer}")
-	private String myOffer;
+	private String myOffer;   // acceses the properties through config server
 	@Autowired
-	private MyConfig myConfig;
+	private MyConfig myConfig;  // File is saved as <microservice>.properties and is stored in local repository and is accesed by config server
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootCouponServiceApplication.class, args);
 	}
 
 	@Bean
-	public ModelMapper getModelMapper() {
+	public ModelMapper getModelMapper() { // used this method for conversion from class type to dto and viceversa.
 		return new ModelMapper();
 	}
 
