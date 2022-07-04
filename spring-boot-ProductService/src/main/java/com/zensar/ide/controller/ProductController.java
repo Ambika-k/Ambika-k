@@ -38,12 +38,12 @@ public class ProductController {
 	@Autowired
 	private CouponRestClient restClient;
 
-	@GetMapping("/products/{productId}")
+	@GetMapping("/products/{productId}")//To get product based on productId
 	public ResponseEntity<ProductDto> getProduct(@PathVariable("productId") int productId) {
 		return new ResponseEntity<ProductDto>(productService.getProduct(productId), HttpStatus.OK);
 	}
 
-	@GetMapping("/products")
+	@GetMapping("/products")//To get all products
 	public ResponseEntity<List<ProductDto>> getProducts(
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "0") int pageNumber,
 			@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
