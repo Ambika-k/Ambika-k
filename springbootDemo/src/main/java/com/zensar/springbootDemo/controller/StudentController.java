@@ -42,7 +42,6 @@ public class StudentController {
 
 	}
 
-	
 	/*
 	 * @ExceptionHandler(value = StudentAlreadyExistsException.class)
 	 * 
@@ -50,7 +49,6 @@ public class StudentController {
 	 * handleStudentAlreadyExistsException(StudentAlreadyExistsException ex) {
 	 * return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage()); }
 	 */
-	  
 	/*
 	 * @ExceptionHandler(value = NoSuchStudentExistsException.class)
 	 * 
@@ -66,6 +64,7 @@ public class StudentController {
 		return new ResponseEntity<StudentDto>(studentService.getStudent(studentId), HttpStatus.OK);
 		// return studentService.getStudent(studentId);
 	}
+
 	@GetMapping(value = "/mystudents/{studentId}")
 	public ResponseEntity<StudentDto> getStudents(@PathVariable("studentId") int studentId) {
 		return new ResponseEntity<StudentDto>(studentService.getStudent(studentId), HttpStatus.OK);

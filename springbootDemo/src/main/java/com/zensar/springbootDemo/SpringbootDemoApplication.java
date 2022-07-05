@@ -13,8 +13,8 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 @SpringBootApplication
 @ComponentScan(basePackages = {"test","com.zensar"})
 @OpenAPIDefinition
-public class SpringbootDemoApplication extends SpringBootServletInitializer{
-
+//public class SpringbootDemoApplication extends SpringBootServletInitializer{
+public class SpringbootDemoApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootDemoApplication.class, args);
 	}
@@ -22,11 +22,10 @@ public class SpringbootDemoApplication extends SpringBootServletInitializer{
 	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		// TODO Auto-generated method stub
-		return super.configure(builder);
-	}
-	
+	/*
+	 * @Override protected SpringApplicationBuilder
+	 * configure(SpringApplicationBuilder builder) { // TODO Auto-generated method
+	 * stub return super.configure(builder); }
+	 */
 	
 }
