@@ -7,8 +7,8 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableConfigServer
-@EnableEurekaClient
+@EnableConfigServer   // It makes this as COnfig Server
+@EnableEurekaClient  // It acts as client for Eureka Server as different microservices can get their configurations from it through Eureka server
 public class ConfigServerApplication {
 
 	public static void main(String[] args) {
