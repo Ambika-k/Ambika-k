@@ -1,6 +1,17 @@
 server:
   port: 2222
-
+security:
+  oauth2:
+    client:
+      clientId: 0f966f484dd1acfdebe4
+      clientSecret: e9e5c18c67e6cf05c692d2c13bfd925e222b2823
+      accessTokenUri: https://github.com/login/oauth/access_token
+      userAuthorizationUri: https://github.com/login/oauth/authorize
+      clientAuthenticationScheme: form
+      token-name: oauth_token
+      authentication-scheme: query
+    resource:
+      userInfoUri: https://api.github.com/user  
 spring:
   datasource:
     password: Ambika@91
